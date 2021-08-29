@@ -4,20 +4,20 @@ services:
   - docker
 
 before_install:
-  - docker build -t kobfolson/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t kobby/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true kobfolson/react-test npm test
+  - docker run -e CI=true kobby/react-test npm test
 
 after_success:
-  - docker build -t kobfolson/multi-client ./client
-  - docker build -t kobfolson/multi-nginx ./nginx
-  - docker build -t kobfolson/multi-server ./server
-  - docker build -t kobfolson/multi-worker ./worker
+  - docker build -t kobby/multi-client ./client
+  - docker build -t kobby/multi-nginx ./nginx
+  - docker build -t kobby/multi-server ./server
+  - docker build -t kobby/multi-worker ./worker
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
-  - docker push kobfolson/multi-client
-  - docker push kobfolson/multi-nginx
-  - docker push kobfolson/multi-server
-  - docker push kobfolson/multi-worker
+  - docker push kobby/multi-client
+  - docker push kobby/multi-nginx
+  - docker push kobby/multi-server
+  - docker push kobby/multi-worker
